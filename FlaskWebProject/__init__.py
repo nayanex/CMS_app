@@ -2,6 +2,7 @@
 The flask application package.
 """
 import logging
+import sys
 
 from flask import Flask
 from flask_login import LoginManager
@@ -14,8 +15,8 @@ app = Flask(__name__)
 app.config.from_object(Config)
 # TODO: Add any logging levels and handlers with app.logger
 app.logger.setLevel(logging.INFO)
-streamHandler = logging.StreamHandler()
-streamHandler.setLevel(logging.WARNING)
+streamHandler = logging.StreamHandler(stream=sys.stdout)
+streamHandler.setLevel(logging.INFO)
 app.logger.addHandler(streamHandler)
 
 Session(app)
