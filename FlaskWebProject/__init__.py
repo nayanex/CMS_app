@@ -17,8 +17,10 @@ app.config.from_object(Config)
 logging_dict = {
     "version": 1,
     "formatters": {
+        ""
         "default": {
-            "format": "[%(asctime)s] %(levelname)s in %(module)s: %(message)s",
+            "format": "[%(asctime)s] %(levelname)s in %(filename)s: %(message)s",
+            "datefmt": "%Y-%m-%d %H:%M",
         }
     },
 }
