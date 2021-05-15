@@ -22,7 +22,7 @@ __pycache__/
 
 # Distribution / packaging
 .Python
-env/
+cms-env/
 build/
 develop-eggs/
 dist/
@@ -121,3 +121,9 @@ ENV/
 
 # mypy
 .mypy_cache
+
+# azure
+.azure
+
+#session
+flask_session/
