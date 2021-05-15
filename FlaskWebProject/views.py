@@ -3,7 +3,6 @@ Routes and views for the flask application.
 """
 
 import uuid
-from datetime import datetime
 
 import msal
 from flask import flash, redirect, render_template, request, session, url_for
@@ -11,7 +10,7 @@ from flask_login import current_user, login_required, login_user, logout_user
 from werkzeug.urls import url_parse
 
 from config import Config
-from FlaskWebProject import app, db
+from FlaskWebProject import app
 from FlaskWebProject.forms import LoginForm, PostForm
 from FlaskWebProject.models import Post, User
 
@@ -28,7 +27,6 @@ imageSourceUrl = (
 @app.route("/home")
 @login_required
 def home():
-    user = User.query.filter_by(username=current_user.username).first_or_404()
     posts = Post.query.all()
     return render_template("index.html", title="Home Page", posts=posts)
 
@@ -116,13 +114,13 @@ def logout():
         # Wipe out user and its token cache from session
         session.clear()
         # Also logout from your tenant's web session
-        return redirect(
+        redirect(
             Config.AUTHORITY
             + "/oauth2/v2.0/logout"
             + "?post_logout_redirect_uri="
-            + url_for("login", _external=True)
+            + url_for("login", _external=True, _scheme="https")
         )
-
+    app.logger.info("Logging user out.")
     return redirect(url_for("login"))
 
 

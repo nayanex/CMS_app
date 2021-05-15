@@ -148,6 +148,7 @@ or `cms-env\scripts\activate` # (Windows).
 ### Install necessary Python dependencies:
 
 `pip install --upgrade pip`
+
 `pip install -r requirements.txt`
 
 ### Run Flask app Locally
